@@ -9,7 +9,7 @@ class AdvertisementAdmin(admin.ModelAdmin):
     list_filter = ['is_auction', 'created_at']
 
     fieldsets = (
-        ('Общее', {'fields': ('title', 'description', 'user'), 'classes': ['collapse']}),
+        ('Общее', {'fields': ('title', 'description', 'user', 'image'), 'classes': ['collapse']}),
         ('Финансы', {'fields': ('price', 'is_auction'), 'classes': ['collapse']})
     )
 
@@ -21,11 +21,11 @@ class AdvertisementAdmin(admin.ModelAdmin):
     def make_auction_as_false(self, request, queryset):
         queryset.update(is_auction=False)
 
-    @admin.display(description='Изображение')
-    def image_adv(self, obj):
-        from django.utils.safestring import mark_safe
-        if obj.image:
-            return mark_safe(f'<img src="{obj.image.url}" width="50" height="50"/>')
+    # @admin.display(description='Изображение')
+    # def image_adv(self, obj):
+    #     from django.utils.safestring import mark_safe
+    #     if obj.image:
+    #         return mark_safe(f'<img src="{obj.image.url}" width="50" height="50"/>')
 
 
 admin.site.register(Advertisement, AdvertisementAdmin)
